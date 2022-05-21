@@ -67,8 +67,8 @@ df = df[df['valeur_fonciere'] > 0]
 
 df['surface_terrain'] = df['surface_terrain'].fillna(0)
 
-df['price_m2'] = df['valeur_fonciere']/df['surface_relle_bati']
-df.loc[df['surface_terrain'] >= 1, 'price_m2'] = df['valeur_fonciere']/(df['surface_relle_bati']+ np.log(df.surface_terrain))
+#df['price_m2'] = df['valeur_fonciere']/df['surface_relle_bati']
+df.loc[df['surface_terrain'] > 1, 'price_m2'] = df['valeur_fonciere']/(df['surface_relle_bati']+ np.log(df.surface_terrain))
 df.loc[df['surface_terrain'] <= 1, 'price_m2'] = df['valeur_fonciere']/df['surface_relle_bati']
 #df = df[df['price_m2'] > 0]
 
