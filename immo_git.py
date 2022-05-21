@@ -64,7 +64,7 @@ df['nature_mutation'] = df['nature_mutation'].str.replace("'",'')
 
 df = df[df['surface_relle_bati'] > 0]
 df = df[df['valeur_fonciere'] > 0]
-df = df[df['surface_terrain'] >= 0]
+#df = df[df['surface_terrain'] >= 0]
 
 df['surface_terrain'] = df['surface_terrain'].fillna(0)
 
