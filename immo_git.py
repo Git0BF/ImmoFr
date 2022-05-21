@@ -62,11 +62,13 @@ df.columns = df.columns.str.replace('properties.', '')
 df.columns = df.columns.str.replace('.', '_')
 df['nature_mutation'] = df['nature_mutation'].str.replace("'",'')
 
+df['surface_relle_bati'] = df['surface_relle_bati'].fillna(0)
+df['valeur_fonciere'] = df['valeur_fonciere'].fillna(0)
+df['surface_terrain'] = df['surface_terrain'].fillna(0)
+
 df = df[df['surface_relle_bati'] > 0]
 df = df[df['valeur_fonciere'] > 0]
-#df = df[df['surface_terrain'] >= 0]
-
-df['surface_terrain'] = df['surface_terrain'].fillna(0)
+df = df[df['surface_terrain'] >= 0]
 
 df.loc[df['surface_terrain'] > 1, 'price_m2'] = df['valeur_fonciere']/(df['surface_relle_bati']+ np.log(df.surface_terrain))
 df.loc[df['surface_terrain'] <= 1, 'price_m2'] = df['valeur_fonciere']/df['surface_relle_bati']
