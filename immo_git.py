@@ -105,7 +105,7 @@ medianl= medianl.reset_index(name='obs')
 median['obs']= medianl['obs']
 median['price_m2_mean']= mean['price_m2']
 
-st.subheader('Type de bien vendu :')
+st.subheader('Type de biens vendus :')
 
 col1b, col2b = st.columns([5, 6])
 df_pie=median.groupby(['type_local'])['obs'].sum()
