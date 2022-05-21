@@ -56,7 +56,6 @@ datacomr1=list(dict.values(dataR))
  
 area=datacomr1[4]
 
-import numpy as np
 df = pd.DataFrame.from_dict(pd.json_normalize(area), orient='columns')
 
 df.columns = df.columns.str.replace('properties.', '')
