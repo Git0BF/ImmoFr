@@ -64,13 +64,13 @@ df['nature_mutation'] = df['nature_mutation'].str.replace("'",'')
 
 df = df[df['surface_relle_bati'] > 0]
 df = df[df['valeur_fonciere'] > 0]
+df = df[df['surface_terrain'] > 0]
 
 df['surface_terrain'] = df['surface_terrain'].fillna(0)
 
-#df['price_m2'] = df['valeur_fonciere']/df['surface_relle_bati']
 df.loc[df['surface_terrain'] > 1, 'price_m2'] = df['valeur_fonciere']/(df['surface_relle_bati']+ np.log(df.surface_terrain))
 df.loc[df['surface_terrain'] <= 1, 'price_m2'] = df['valeur_fonciere']/df['surface_relle_bati']
-#df = df[df['price_m2'] > 0]
+
 
 df['date_mutation']= pd.to_datetime(df['date_mutation'])
 df['year'] = df['date_mutation'].dt.year
@@ -189,5 +189,9 @@ df_price_dist1.rename(columns = {'valeur_fonciere':'Mutations/surface'}, inplace
 col2a.subheader('Distribution Qte/Px')
 col2a.bar_chart(df_price_dist1)
 
+st.subheader('Carte des ventes :')
+
+df_map = df_w_o.filter(['lat','lon'], axis=1)
+st.map(df_map)
 
 st.stop()
