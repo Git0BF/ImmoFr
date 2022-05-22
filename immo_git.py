@@ -77,11 +77,11 @@ df.loc[df['surface_terrain'] <= 1, 'price_m2'] = df['valeur_fonciere']/df['surfa
 df['date_mutation']= pd.to_datetime(df['date_mutation'])
 df['year'] = df['date_mutation'].dt.year
 
-df=df[df.price_m2 < df.price_m2.quantile(.9)]
+df=df[df.price_m2 < df.price_m2.quantile(.95)]
 
 df['z_score'] = (df['price_m2'] - df['price_m2'].mean()) / df['price_m2'].std()
 
-df_w_o = df[(df['z_score'] < 1) & (df['z_score'] > -1)]
+df_w_o = df[(df['z_score'] < 3) & (df['z_score'] > -3)]
 
 df_w_o = df_w_o[df_w_o['nature_mutation'].str.contains('Adjudication') == False]
 df_w_o = df_w_o[df_w_o['nature_mutation'].str.contains('Echange') == False]
