@@ -24,7 +24,7 @@ dist = st.sidebar.slider('Choisissez un rayon (m) :', 100, 500, 1000)
 dist= str(dist)
 st.write('Votre recherche : '+adresseS+' à '+codePostal+' dans un rayon de '+dist+'m pour la periode 2014-2019')
 
-if codePostal = None:
+if codePostal == None:
     st.stop()
 
 def randomword(length):
