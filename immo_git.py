@@ -81,7 +81,7 @@ df=df[df.price_m2 < df.price_m2.quantile(.95)]
 
 df['z_score'] = (df['price_m2'] - df['price_m2'].mean()) / df['price_m2'].std()
 
-df_w_o = df[(df['z_score'] < 3) & (df['z_score'] > -3)]
+df_w_o = df[(df['z_score'] < 1) & (df['z_score'] > -1)]
 
 df_w_o = df_w_o[df_w_o['nature_mutation'].str.contains('Adjudication') == False]
 df_w_o = df_w_o[df_w_o['nature_mutation'].str.contains('Echange') == False]
@@ -149,7 +149,7 @@ def round_interval(i, ndigits=0):
 
 df_surf_dist.range=df_surf_dist['range'].apply(round_interval, ndigits=0)
 
-df_price_dist=df_w_o['valeur_fonciere'].value_counts(bins=50, sort=False)
+df_price_dist=df_w_o['valeur_fonciere'].value_counts(bins=90, sort=False)
 df_price_dist = df_price_dist.reset_index(name='surface_relle_bati')
 df_price_dist.rename(columns = {'index':'range'}, inplace = True)
 df_price_dist.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
