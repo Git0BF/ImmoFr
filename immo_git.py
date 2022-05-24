@@ -13,6 +13,9 @@ st.title('Marché immobilier en France')
 st.sidebar.title('Ma recherche')
 
 codePostal = st.sidebar.text_input('Ville :')
+if codePostal == None:
+    st.stop()
+    
 if codePostal != None:
     codePostalS= str(codePostal)
 
@@ -23,9 +26,6 @@ if adresse != None:
 dist = st.sidebar.slider('Choisissez un rayon (m) :', 100, 500, 1000) 
 dist= str(dist)
 st.write('Votre recherche : '+adresseS+' à '+codePostal+' dans un rayon de '+dist+'m pour la periode 2014-2019')
-
-if codePostal == None:
-    st.stop()
 
 def randomword(length):
    letters = string.ascii_lowercase
@@ -99,10 +99,8 @@ median.rename(columns = {'price_m2':'price_m2_median'}, inplace = True)
 mean = df_w_o.groupby(['year','nature_mutation','type_local'])['price_m2'].mean()
 mean= mean.reset_index(name='price_m2')
 
-
 medianl = df_w_o.groupby(['year','nature_mutation','type_local'])['price_m2'].size()
 medianl= medianl.reset_index(name='obs')
-
 
 median['obs']= medianl['obs']
 median['price_m2_mean']= mean['price_m2']
@@ -135,18 +133,15 @@ if appartement:
     chart=(alt.Chart(median_ap).transform_fold(['price_m2_median', 'price_m2_mean'], as_=['Stats_Apt', 'Valeur']).mark_bar().encode(x='Stats_Apt:N',y='Valeur:Q',color='Stats_Apt:N',column='year',))
     st.altair_chart(chart)
     
-    
 if maison:
     chart=(alt.Chart(median_ma).transform_fold(['price_m2_median', 'price_m2_mean'], as_=['Stats_Mais', 'Valeur']).mark_bar().encode(x='Stats_Mais:N',y='Valeur:Q',color='Stats_Mais:N',column='year',))
     st.altair_chart(chart)
-    
-        
+            
 df_surf_dist=df_w_o['surface_relle_bati'].value_counts(bins=20, sort=False)
 df_surf_dist = df_surf_dist.reset_index(name='surface_relle_bati')
 df_surf_dist.rename(columns = {'index':'range'}, inplace = True)
 df_surf_dist.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
 df_surf_dist['range'] = df_surf_dist['range'].apply(lambda x: pd.Interval(left=int(round(x.left)), right=int(round(x.right))))
-
 
 def round_interval(i, ndigits=0):
     return pd.Interval(round(i.left, ndigits), round(i.right, ndigits), i.closed)
@@ -164,9 +159,7 @@ df_price_dist.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
 df_price_dist.range=df_price_dist['range'].apply(round_interval, ndigits=-3)
 df_price_dist['range'] = df_price_dist['range'].apply(lambda x: pd.Interval(left=int(round(x.left)), right=int(round(x.right))))
 
-
 st.subheader('Etat global du marché :')
-
 
 col1, col2 = st.columns([5, 6])
 col1a, col2a = st.columns([5, 6])
@@ -189,7 +182,6 @@ df_surf_dist1.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
 
 col2.subheader('Distribution Qte/Surf')
 col2.bar_chart(df_surf_dist1)
-
 
 df_price_dist1=df_price_dist
 df_price_dist1['left'] = df_price_dist['range'].array.left
