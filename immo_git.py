@@ -15,9 +15,6 @@ st.sidebar.title('Ma recherche')
 codePostal = st.sidebar.text_input('Ville :')
 if codePostal != None:
     codePostalS= str(codePostal)
-if codePostal ==None:
-    codePostalS= str('Marseille')
-    
 
 adresse = st.sidebar.text_input('Adresse :')
 if adresse != None:
