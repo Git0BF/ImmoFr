@@ -147,7 +147,7 @@ df_surf_dist['range'] = df_surf_dist['range'].apply(lambda x: pd.Interval(left=i
 def round_interval(i, ndigits=0):
     return pd.Interval(round(i.left, ndigits), round(i.right, ndigits), i.closed)
 
-num_bins = 60
+num_bins = 100
 min_val = int(df_w_o['valeur_fonciere'].min())+1
 max_val = int(df_w_o['valeur_fonciere'].max())
 bin_size = (max_val-min_val)//num_bins
