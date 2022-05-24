@@ -64,6 +64,8 @@ df['surface_relle_bati'] = df['surface_relle_bati'].fillna(0)
 df['valeur_fonciere'] = df['valeur_fonciere'].fillna(0)
 df['surface_terrain'] = df['surface_terrain'].fillna(0)
 
+df = df[df['lat'] > 0]
+df = df[df['lon'] > 0]
 df = df[df['surface_relle_bati'] > 0]
 df = df[df['valeur_fonciere'] > 0]
 df = df[df['surface_terrain'] >= 0]
@@ -75,7 +77,7 @@ df.loc[df['surface_terrain'] <= 1, 'price_m2'] = df['valeur_fonciere']/df['surfa
 df['date_mutation']= pd.to_datetime(df['date_mutation'])
 df['year'] = df['date_mutation'].dt.year
 
-df=df[df.price_m2 < df.price_m2.quantile(.95)]
+df=df[df.price_m2 < df.price_m2.quantile(.9)]
 
 df['z_score'] = (df['price_m2'] - df['price_m2'].mean()) / df['price_m2'].std()
 
@@ -147,7 +149,7 @@ df_surf_dist['range'] = df_surf_dist['range'].apply(lambda x: pd.Interval(left=i
 def round_interval(i, ndigits=0):
     return pd.Interval(round(i.left, ndigits), round(i.right, ndigits), i.closed)
 
-num_bins = 100
+num_bins = 60
 min_val = int(df_w_o['valeur_fonciere'].min())+1
 max_val = int(df_w_o['valeur_fonciere'].max())
 bin_size = (max_val-min_val)//num_bins
