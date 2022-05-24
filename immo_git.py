@@ -68,8 +68,6 @@ df['surface_relle_bati'] = df['surface_relle_bati'].fillna(0)
 df['valeur_fonciere'] = df['valeur_fonciere'].fillna(0)
 df['surface_terrain'] = df['surface_terrain'].fillna(0)
 
-df = df[df['lat'] > 0]
-df = df[df['lon'] > 0]
 df = df[df['surface_relle_bati'] > 0]
 df = df[df['valeur_fonciere'] > 0]
 df = df[df['surface_terrain'] >= 0]
