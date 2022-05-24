@@ -13,7 +13,7 @@ st.title('Marché immobilier en France')
 st.sidebar.title('Ma recherche')
 
 codePostal = st.sidebar.text_input('Ville :')
-if codePostal == None:
+if not codePostal:
     st.stop()
     
 if codePostal != None:
