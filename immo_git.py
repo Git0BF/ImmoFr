@@ -149,7 +149,12 @@ def round_interval(i, ndigits=0):
 
 df_surf_dist.range=df_surf_dist['range'].apply(round_interval, ndigits=0)
 
-df_price_dist=df_w_o['valeur_fonciere'].value_counts(bins=60, sort=False)
+num_bins = 40
+min_val = int(df_w_o['valeur_fonciere'].min())+1
+max_val = int(df_w_o['valeur_fonciere'].max())
+bin_size = (max_val-min_val)//num_bins
+bins = np.arange(min_val,max_val,bin_size)
+df_price_dist=df_w_o['valeur_fonciere'].value_counts(bins=bins, sort=False)
 df_price_dist = df_price_dist.reset_index(name='surface_relle_bati')
 df_price_dist.rename(columns = {'index':'range'}, inplace = True)
 df_price_dist.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
