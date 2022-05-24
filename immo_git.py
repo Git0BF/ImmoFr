@@ -13,10 +13,11 @@ st.title('Marché immobilier en France')
 st.sidebar.title('Ma recherche')
 
 codePostal = st.sidebar.text_input('Ville :')
-
 if codePostal != None:
     codePostalS= str(codePostal)
-
+if codePostal ==None:
+    codePostalS= 'Marseille'
+    
 
 adresse = st.sidebar.text_input('Adresse :')
 if adresse != None:
@@ -143,11 +144,11 @@ df_surf_dist=df_w_o['surface_relle_bati'].value_counts(bins=20, sort=False)
 df_surf_dist = df_surf_dist.reset_index(name='surface_relle_bati')
 df_surf_dist.rename(columns = {'index':'range'}, inplace = True)
 df_surf_dist.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
+df_surf_dist['range'] = df_surf_dist['range'].apply(lambda x: pd.Interval(left=int(round(x.left)), right=int(round(x.right))))
+
 
 def round_interval(i, ndigits=0):
     return pd.Interval(round(i.left, ndigits), round(i.right, ndigits), i.closed)
-
-df_surf_dist.range=df_surf_dist['range'].apply(round_interval, ndigits=0)
 
 num_bins = 60
 min_val = int(df_w_o['valeur_fonciere'].min())+1
@@ -160,6 +161,8 @@ df_price_dist.rename(columns = {'index':'range'}, inplace = True)
 df_price_dist.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
 
 df_price_dist.range=df_price_dist['range'].apply(round_interval, ndigits=-3)
+df_price_dist['range'] = df_price_dist['range'].apply(lambda x: pd.Interval(left=int(round(x.left)), right=int(round(x.right))))
+
 
 st.subheader('Etat global du marché :')
 
