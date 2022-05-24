@@ -141,25 +141,25 @@ if maison:
         
 df_surf_dist=df_w_o['surface_relle_bati'].value_counts(bins=20, sort=False)
 df_surf_dist = df_surf_dist.reset_index(name='surface_relle_bati')
-df_surf_dist.rename(columns = {'index':'range'}, inplace = True)
+df_surf_dist.rename(columns = {'index':'Intervalle m2'}, inplace = True)
 df_surf_dist.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
 
 def round_interval(i, ndigits=0):
     return pd.Interval(round(i.left, ndigits), round(i.right, ndigits), i.closed)
 
-df_surf_dist.range=df_surf_dist['range'].apply(round_interval, ndigits=0)
+df_surf_dist.range=df_surf_dist['Intervalle m2'].apply(round_interval, ndigits=0)
 
-num_bins = 40
+num_bins = 60
 min_val = int(df_w_o['valeur_fonciere'].min())+1
 max_val = int(df_w_o['valeur_fonciere'].max())
 bin_size = (max_val-min_val)//num_bins
 bins = np.arange(min_val,max_val,bin_size)
 df_price_dist=df_w_o['valeur_fonciere'].value_counts(bins=bins, sort=False)
 df_price_dist = df_price_dist.reset_index(name='surface_relle_bati')
-df_price_dist.rename(columns = {'index':'range'}, inplace = True)
+df_price_dist.rename(columns = {'index':'Intervalle €'}, inplace = True)
 df_price_dist.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
 
-df_price_dist.range=df_price_dist['range'].apply(round_interval, ndigits=-3)
+df_price_dist.range=df_price_dist['Interval €'].apply(round_interval, ndigits=-3)
 
 st.subheader('Etat global du marché :')
 
