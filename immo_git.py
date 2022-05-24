@@ -13,8 +13,6 @@ st.title('Marché immobilier en France')
 st.sidebar.title('Ma recherche')
 
 codePostal = st.sidebar.text_input('Ville :')
-if not codePostal:
-    st.stop()
     
 if codePostal != None:
     codePostalS= str(codePostal)
@@ -25,6 +23,10 @@ if adresse != None:
 
 dist = st.sidebar.slider('Choisissez un rayon (m) :', 100, 500, 1000) 
 dist= str(dist)
+
+if not codePostal:
+    st.stop()
+    
 st.write('Votre recherche : '+adresseS+' à '+codePostal+' dans un rayon de '+dist+'m pour la periode 2014-2019')
 
 def randomword(length):
