@@ -16,7 +16,7 @@ codePostal = st.sidebar.text_input('Ville :')
 if codePostal != None:
     codePostalS= str(codePostal)
 if codePostal ==None:
-    codePostalS= 'Marseille'
+    codePostalS= str('Marseille')
     
 
 adresse = st.sidebar.text_input('Adresse :')
