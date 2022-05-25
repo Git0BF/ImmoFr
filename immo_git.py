@@ -21,7 +21,7 @@ div[data-baseweb="tooltip"] {
 """
 st.markdown(tooltip_style,unsafe_allow_html=True)
 
-codePostal = st.sidebar.text_input('Ville :', help='h'))
+codePostal = st.sidebar.text_input('Ville :', help='France entière, Alsace et Moselle exclus')
 
 if codePostal != None:
     codePostalS= str(codePostal)
