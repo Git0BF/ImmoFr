@@ -12,8 +12,8 @@ st.title('Marché immobilier en France')
 
 st.sidebar.title('Ma recherche')
 
-codePostal = st.sidebar.text_input('Ville :')
-    
+codePostal = st.sidebar.text_input('Ville :', help='France entière, Alsace et Moselle exclus'))
+
 if codePostal != None:
     codePostalS= str(codePostal)
 
@@ -37,6 +37,17 @@ word=randomword(7)
 geolocator = Nominatim(user_agent=word)
 
 location = geolocator.geocode(adresseS+' ,France ,'+codePostalS)
+my_str = str(location)
+ 
+target = 'Moselle'
+target1= 'Alsace'
+ 
+if (my_str.__contains__(target)):
+    st.write('Cette zone geographique est indisponible')
+    st.stop()
+if (my_str.__contains__(target1)):
+    st.write('Cette zone geographique est indisponible')
+    st.stop()
 
 if location == None:
     st.write('Essayez une adresse à proximité')
