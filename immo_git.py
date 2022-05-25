@@ -33,6 +33,7 @@ dist = st.sidebar.slider('Choisissez un rayon (m) :', 100, 500, 1000)
 dist= str(dist)
 
 if not codePostal:
+    st.write('Commencez votre recherche dans la barre de recherche à gauche')
     st.stop()
     
 st.write('Votre recherche : '+adresseS+' à '+codePostal+' dans un rayon de '+dist+'m pour la periode 2014-2019')
