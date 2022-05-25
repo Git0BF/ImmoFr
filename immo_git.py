@@ -48,7 +48,7 @@ location = geolocator.geocode(adresseS+' ,France ,'+codePostalS)
 
 my_str = str(location)
  
-target = 'Moselle'
+target = ' Moselle'
 target1= '-Rhin'
  
 if (my_str.__contains__(target)):
