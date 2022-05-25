@@ -12,7 +12,16 @@ st.title('Marché immobilier en France')
 
 st.sidebar.title('Ma recherche')
 
-codePostal = st.sidebar.text_input('Ville :', help='France entière, Alsace et Moselle exclus'))
+tooltip_style = """
+<style>
+div[data-baseweb="tooltip"] {
+  width: 350px;
+}
+</style>
+"""
+st.markdown(tooltip_style,unsafe_allow_html=True)
+
+codePostal = st.sidebar.text_input('Ville :', help='h'))
 
 if codePostal != None:
     codePostalS= str(codePostal)
