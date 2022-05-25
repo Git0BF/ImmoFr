@@ -7,10 +7,6 @@ import statistics
 import random, string, sys
 import altair as alt
 
-[theme]
-base="dark"
-primaryColor="purple"
-
 st.title('Marché immobilier en France')
 
 st.sidebar.title('Ma recherche')
