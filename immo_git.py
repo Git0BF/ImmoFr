@@ -26,7 +26,7 @@ codePostal = st.sidebar.text_input('Ville :', help='France entière, Alsace et M
 if codePostal != None:
     codePostalS= str(codePostal)
 
-adresse = st.sidebar.text_input('Adresse :')
+adresse = st.sidebar.text_input('Adresse :', help='Ex: 16 rue de la Source')
 if adresse != None:
     adresseS= str(adresse)
 
@@ -46,6 +46,7 @@ word=randomword(7)
 geolocator = Nominatim(user_agent=word)
 
 location = geolocator.geocode(adresseS+' ,France ,'+codePostalS)
+
 my_str = str(location)
  
 target = 'Moselle'
