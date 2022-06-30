@@ -1,3 +1,2 @@
 # Immofr
-
-https://share.streamlit.io/git0bf/immofr/main/immo_git.py
+https://git0bf-immofr-immo-git-h5dv65.streamlitapp.com
