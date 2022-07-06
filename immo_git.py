@@ -217,6 +217,7 @@ st.subheader('Carte des ventes :')
 
 df_map = df_w_o.filter(['lat','lon'], axis=1)
 st.map(df_map)
-st.snow()
+
+st.balloons()
 st.stop()
 
