@@ -167,7 +167,7 @@ df_surf_dist['range'] = df_surf_dist['range'].apply(lambda x: pd.Interval(left=i
 def round_interval(i, ndigits=0):
     return pd.Interval(round(i.left, ndigits), round(i.right, ndigits), i.closed)
 
-num_bins = 60
+num_bins = 40
 min_val = int(df_w_o['valeur_fonciere'].min())
 max_val = int(df_w_o['valeur_fonciere'].max())
 bin_size = (max_val-min_val)//num_bins
@@ -217,6 +217,6 @@ st.subheader('Carte des ventes :')
 
 df_map = df_w_o.filter(['lat','lon'], axis=1)
 st.map(df_map)
-
-st.stop()
 st.snow()
+st.stop()
+
