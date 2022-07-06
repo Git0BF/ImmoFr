@@ -100,7 +100,7 @@ df.loc[df['surface_terrain'] <= 1, 'price_m2'] = df['valeur_fonciere']/df['surfa
 df['date_mutation']= pd.to_datetime(df['date_mutation'])
 df['year'] = df['date_mutation'].dt.year
 
-df=df[df.price_m2 < df.price_m2.quantile(.9)]
+df=df[df.price_m2 < df.price_m2.quantile(.95)]
 
 df['z_score'] = (df['price_m2'] - df['price_m2'].mean()) / df['price_m2'].std()
 
@@ -219,3 +219,4 @@ df_map = df_w_o.filter(['lat','lon'], axis=1)
 st.map(df_map)
 
 st.stop()
+st.snow()
