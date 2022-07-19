@@ -157,8 +157,12 @@ appartement = st.checkbox('Appartement')
 maison=st.checkbox('Maison')
 
 if appartement:
-    chart=(alt.Chart(median_ap).transform_fold(['price_m2_median', 'price_m2_mean'], as_=['Stats_Apt', 'Valeur']).mark_bar().encode(x='Stats_Apt:N',y='Valeur:Q',color='Stats_Apt:N',column='year',))
-    st.altair_chart(chart)
+  fig1 = px.bar(median_ap, x="year", y=["price_m2_median", "price_m2_mean"], title="Wide-Form Input")
+  #fig.show()
+  st.plotly_chart(fig1)
+  
+    #chart=(alt.Chart(median_ap).transform_fold(['price_m2_median', 'price_m2_mean'], as_=['Stats_Apt', 'Valeur']).mark_bar().encode(x='Stats_Apt:N',y='Valeur:Q',color='Stats_Apt:N',column='year',))
+    #st.altair_chart(chart)
     
 if maison:
     chart=(alt.Chart(median_ma).transform_fold(['price_m2_median', 'price_m2_mean'], as_=['Stats_Mais', 'Valeur']).mark_bar().encode(x='Stats_Mais:N',y='Valeur:Q',color='Stats_Mais:N',column='year',))
