@@ -227,7 +227,7 @@ col2a.bar_chart(df_price_dist1)
 st.subheader('Carte des ventes :')
 
 df_map = df_w_o.filter(['lat','lon'], axis=1)
-figmap = px.density_mapbox(df_map,lat='lat',lon='lon', radius-1, center=dict (lat=lat1, lon=lon1), zoom=1.5, mapbox_style="stamen-terrain")
+figmap = px.density_mapbox(df_map,lat=df_map.lat, lon=df_map.lon, radius-1, center=dict (lat=lat1, lon=lon1), zoom=1.5, mapbox_style="stamen-terrain")
 st.plotly_chart(figmap)
 
 st.balloons()
