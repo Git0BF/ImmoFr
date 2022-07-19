@@ -225,18 +225,19 @@ col2a.subheader('Distribution Qte/Px')
 col2a.bar_chart(df_price_dist1)
 
 st.subheader('Carte des ventes :')
-
+lat1=float(lat1)
+lon1=float(lon1)
 df_map = df_w_o.filter(['lat','lon'], axis=1)
 df_hmap=df_map.value_counts(['lat', 'lon']).reset_index(name='Transactions')
 #df_mapg=df_map.groupby(['lat','lon']).B.agg('count').to_frame('count').reset_index()
-st.dataframe(df_hmap)
+#st.dataframe(df_hmap)
 #figmap = px.density_mapbox(df_map,lat=df_map.lat, lon=df_map.lon, radius-1, center=dict (lat=lat1, lon=lon1), zoom=1.5, mapbox_style="stamen-terrain")
 #figmap = px.scatter_geo(df_map, lat='Lat', lon='Long')
 
-#figmap = px.density_mapbox(df_hmap, lat='lat', lon='lon', z='Transactions', radius=10,
-                        #center=dict(lat=lat1, lon=lon1), zoom=10,
-                        #mapbox_style="stamen-terrain")
-#st.plotly_chart(figmap)
+figmap = px.density_mapbox(df_hmap, lat='lat', lon='lon', z='Transactions', radius=10,
+                        center=dict(lat=lat1, lon=lon1), zoom=10,
+                        mapbox_style="stamen-terrain")
+st.plotly_chart(figmap)
 st.balloons()
 st.stop()
 
