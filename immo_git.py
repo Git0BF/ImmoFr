@@ -64,13 +64,13 @@ if location == None:
     st.write('Essayez une adresse à proximité')
     st.stop()
 
-lat=str(location.latitude)
+lat1=str(location.latitude)
  
-lon=str(location.longitude)
+lon1=str(location.longitude)
  
 loc=str(location)
 
-url= 'http://api.cquest.org/dvf?lat='+lat+'&lon='+lon+'&dist='+dist
+url= 'http://api.cquest.org/dvf?lat='+lat1+'&lon='+lon1+'&dist='+dist
 
 request= requests.get(url)
 
@@ -227,7 +227,8 @@ col2a.bar_chart(df_price_dist1)
 st.subheader('Carte des ventes :')
 
 df_map = df_w_o.filter(['lat','lon'], axis=1)
-st.map(df_map)
+figmap = px.density_mapbox(df_map,lat='lat',lon='lon', radius-1, center=dict (lat=lat1, lon=lon1), zoom=1.5, mapbox_style="stamen-terrain")
+st.plotly_chart(figmap)
 
 st.balloons()
 st.stop()
