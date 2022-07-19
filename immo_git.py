@@ -212,7 +212,7 @@ df_surf_dist1['left'] = df_surf_dist['range'].array.left
 df_surf_dist1.drop ('range', axis=1, inplace=True)
 df_surf_dist1 = df_surf_dist1.rename(columns={'left':'index'}).set_index('index')
 df_surf_dist1.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
-fig3 = px.bar(df_surf_dist1, x="ventes", y="range",color='ventes')
+fig3 = px.bar(df_surf_dist1, x="range", y="ventes",color='ventes')
 col2.subheader('Distribution Qte/Surf')
 #col2.bar_chart(df_surf_dist1)
 with col2:
