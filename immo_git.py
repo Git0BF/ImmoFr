@@ -228,7 +228,7 @@ st.subheader('Carte des ventes :')
 
 df_map = df_w_o.filter(['lat','lon'], axis=1)
 #figmap = px.density_mapbox(df_map,lat=df_map.lat, lon=df_map.lon, radius-1, center=dict (lat=lat1, lon=lon1), zoom=1.5, mapbox_style="stamen-terrain")
-figmap = px.scatter geo (df_map, lat='Lat', lon='Long')
+figmap = px.scatter_geo(df_map, lat='Lat', lon='Long')
 st.plotly_chart(figmap)
 
 st.balloons()
