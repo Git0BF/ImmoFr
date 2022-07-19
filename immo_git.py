@@ -6,6 +6,7 @@ import numpy as np
 import statistics
 import random, string, sys
 import altair as alt
+import plotly.express as px
 
 st.title('Marché immobilier en France')
 
@@ -131,11 +132,15 @@ st.subheader('Type de biens vendus :')
 col1b, col2b = st.columns([5, 6])
 df_pie=median.groupby(['type_local'])['obs'].sum()
 df_pie=df_pie.reset_index('type_local', inplace=False)
+#figpie = px.pie(df_pie, values='Nbr_de_vente', names='type_local', title='Répartition des ventes')
+#fig.show()
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
+figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title='Répartition des ventes')
+
 chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes", type="quantitative"), color=alt.Color(field="type_local", type="nominal"),)
 
 with col2b:
-    st.altair_chart(chartp)
+    st.plotly_chart(figpie)
 with col1b:
     st.dataframe(df_pie)
 
