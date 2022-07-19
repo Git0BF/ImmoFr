@@ -143,7 +143,8 @@ chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes"
 st.plotly_chart(figpie)
 #with col1b:
     #st.dataframe(df_pie)
-
+st.dataframe(df_pie)
+  
 median_ap=median[median['type_local'].str.contains('Maison') == False]
 median_ap.drop(columns=['nature_mutation','type_local', 'obs'], inplace=True)
 
