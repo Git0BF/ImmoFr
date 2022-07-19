@@ -157,7 +157,7 @@ appartement = st.checkbox('Appartement')
 maison=st.checkbox('Maison')
 
 if appartement:
-  fig1 = px.bar(median_ap, x="year", y=["price_m2_median", "price_m2_mean"],  barmode='group', title="Prix moyen et median par an")
+  fig1 = px.bar(median_ap, x="year", y=["price_m2_median", "price_m2_mean"],  barmode='group', title="Prix moyen et median d'un appartement(€/m2)")
   #fig.show()
   st.plotly_chart(fig1)
   
@@ -165,8 +165,10 @@ if appartement:
     #st.altair_chart(chart)
     
 if maison:
-    chart=(alt.Chart(median_ma).transform_fold(['price_m2_median', 'price_m2_mean'], as_=['Stats_Mais', 'Valeur']).mark_bar().encode(x='Stats_Mais:N',y='Valeur:Q',color='Stats_Mais:N',column='year',))
-    st.altair_chart(chart)
+  fig2 = px.bar(median_ma, x="year", y=["price_m2_median", "price_m2_mean"],  barmode='group', title="Prix moyen et median d'une maison(€/m2)")
+  st.plotly_chart(fig2)
+    #chart=(alt.Chart(median_ma).transform_fold(['price_m2_median', 'price_m2_mean'], as_=['Stats_Mais', 'Valeur']).mark_bar().encode(x='Stats_Mais:N',y='Valeur:Q',color='Stats_Mais:N',column='year',))
+    #st.altair_chart(chart)
             
 df_surf_dist=df_w_o['surface_relle_bati'].value_counts(bins=20, sort=False)
 df_surf_dist = df_surf_dist.reset_index(name='surface_relle_bati')
