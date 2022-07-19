@@ -157,7 +157,7 @@ appartement = st.checkbox('Appartement')
 maison=st.checkbox('Maison')
 
 if appartement:
-  fig1 = px.bar(median_ap, x="year", y=["price_m2_median", "price_m2_mean"], title="Wide-Form Input")
+  fig1 = px.bar(median_ap, x="year", y=["price_m2_median", "price_m2_mean"],  barmode='group', title="Prix moyen et median par an")
   #fig.show()
   st.plotly_chart(fig1)
   
