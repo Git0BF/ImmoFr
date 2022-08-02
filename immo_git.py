@@ -134,7 +134,9 @@ col1b, col2b = st.columns([5, 6])
 df_pie=median.groupby(['type_local'])['obs'].sum()
 
 df_year=median.drop(['price_m2_median', 'price_m2_mean', 'nature_mutation'], axis=1, inplace=True)
-#df_year=df_year.pivot(index='type_local', columns='year', values='obs')
+
+df_year = median[['type_local','year', 'obs']]
+df_year=df_year.pivot(index='type_local', columns='year', values='obs')
 
 df_pie=df_pie.reset_index('type_local', inplace=False)
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
@@ -145,7 +147,7 @@ chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes"
 #with col2b:
 st.plotly_chart(figpie)
 
-#st.dataframe(df_year)
+st.dataframe(df_year)
   
 median_ap=median[median['type_local'].str.contains('Maison') == False]
 median_ap.drop(columns=['nature_mutation','type_local', 'obs'], inplace=True)
