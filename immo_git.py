@@ -135,6 +135,7 @@ df_pie=median.groupby(['type_local'])['obs'].sum()
 
 df_year = median[['type_local','year', 'obs']]
 df_year=df_year.pivot(index='type_local', columns='year', values='obs')
+df_year.fillna(0)
 
 df_pie=df_pie.reset_index('type_local', inplace=False)
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
