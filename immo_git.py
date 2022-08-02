@@ -133,8 +133,6 @@ col1b, col2b = st.columns([5, 6])
 
 df_pie=median.groupby(['type_local'])['obs'].sum()
 
-df_year=median.drop(['price_m2_median', 'price_m2_mean', 'nature_mutation'], axis=1, inplace=True)
-
 df_year = median[['type_local','year', 'obs']]
 df_year=df_year.pivot(index='type_local', columns='year', values='obs')
 
