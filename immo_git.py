@@ -127,7 +127,7 @@ medianl= medianl.reset_index(name='obs')
 median['obs']= medianl['obs']
 median['price_m2_mean']= mean['price_m2']
 
-st.subheader('Type de biens vendus :')
+st.subheader('Type de biens vendus entre 2014 et 2019 :')
 
 col1b, col2b = st.columns([5, 6])
 
@@ -147,6 +147,7 @@ chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes"
 #with col2b:
 st.plotly_chart(figpie)
 
+st.subheader('Detail des ventes par années :')
 st.dataframe(df_year)
   
 median_ap=median[median['type_local'].str.contains('Maison') == False]
