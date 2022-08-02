@@ -133,6 +133,8 @@ col1b, col2b = st.columns([5, 6])
 
 df_pie=median.groupby(['type_local'])['obs'].sum()
 df_pie2=median.groupby(['type_local','year'])['obs'].sum()
+df_pie2.pivot(index='type_local', columns='year', values='obs')
+
 df_pie=df_pie.reset_index('type_local', inplace=False)
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
 figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
