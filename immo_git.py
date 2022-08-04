@@ -235,6 +235,6 @@ figmap = px.density_mapbox(df_hmap, lat='lat', lon='lon', z='Transactions', radi
                         center=dict(lat=lat1, lon=lon1), zoom=13,
                         mapbox_style="stamen-terrain")
 st.plotly_chart(figmap)
-st.balloons()
+#st.balloons()
 st.stop()
 
