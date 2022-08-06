@@ -149,8 +149,9 @@ st.plotly_chart(figpie)
 
 st.subheader('Evolution des ventes par années :')
 #st.dataframe(df_year)
-chartdist=px.bar(df_year, x=df_years.columns, y=df_years.index)
-st.plotly_chart(chartdist)
+#chartdist=px.bar(df_year, x=df_years.columns, y=df_years.index)
+fig12 = px.line(df_year, x = df_years.columns, template = 'plotly_dark')
+st.plotly_chart(fig12)
   
 median_ap=median[median['type_local'].str.contains('Maison') == False]
 median_ap.drop(columns=['nature_mutation','type_local', 'obs'], inplace=True)
