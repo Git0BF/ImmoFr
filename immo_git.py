@@ -134,9 +134,10 @@ col1b, col2b = st.columns([5, 6])
 df_pie=median.groupby(['type_local'])['obs'].sum()
 
 df_year = median[['type_local','year', 'obs']]
-df_year=df_year.pivot(index='type_local', columns='year', values='obs')
+df_year=df_year.pivot(index='year', columns='type_local', values='obs')
 df_year=df_year.replace(np.nan, 0)
 df_year = df_year.astype(int)
+#df_pivoted = df_year.pivot_table(index=['2014', 'day'], columns='time',values='value', aggfunc='first').reset_index()
 
 df_pie=df_pie.reset_index('type_local', inplace=False)
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
@@ -148,7 +149,8 @@ chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes"
 st.plotly_chart(figpie)
 
 st.subheader('Evolution des ventes par années :')
-df_year=df_year.unstack(level=-1)
+
+
 st.dataframe(df_year)
 #chartdist=px.bar(df_year, x=df_years.columns, y=df_years.index)
 #fig12 = px.line(df_year, x = df_years.columns, template = 'plotly_dark')
