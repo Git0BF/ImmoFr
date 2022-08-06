@@ -148,7 +148,7 @@ chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes"
 st.plotly_chart(figpie)
 
 st.subheader('Evolution des ventes par années :')
-df_year=df_year.unstack(level=0)
+df_year=df_year.unstack(level=-1)
 st.dataframe(df_year)
 #chartdist=px.bar(df_year, x=df_years.columns, y=df_years.index)
 #fig12 = px.line(df_year, x = df_years.columns, template = 'plotly_dark')
