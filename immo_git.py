@@ -147,8 +147,10 @@ chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes"
 #with col2b:
 st.plotly_chart(figpie)
 
-st.subheader('Detail des ventes par années :')
-st.dataframe(df_year)
+st.subheader('Evolution des ventes par années :')
+#st.dataframe(df_year)
+chartdist=px.bar(df_year, x=df_years.columns, y=df_years.index)
+st.plotly_chart(chartdist)
   
 median_ap=median[median['type_local'].str.contains('Maison') == False]
 median_ap.drop(columns=['nature_mutation','type_local', 'obs'], inplace=True)
