@@ -152,7 +152,7 @@ st.subheader('Evolution des ventes par années :')
 
 
 #st.dataframe(df_year)
-chartdist=px.line(df_year, x=df_year.index, y=df_year['Appartement','Maison'])
+chartdist=px.line(df_year, x=df_year.index, y=['Appartement','Maison'])
 
 st.plotly_chart(chartdist)
   
