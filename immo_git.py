@@ -149,7 +149,7 @@ st.subheader('Type de biens vendus entre 2014 et 2019 :')
 df_pie=median.groupby(['type_local'])['obs'].sum()
 
 # Mutations per type per year.
-col1b, col2b = st.columns([5, 6])
+col1b, col2b = st.columns([5, 5])
 df_year = median[['type_local','year', 'obs']]
 df_year_ap=df_year[df_year['type_local'].str.contains('Maison') == False]
 df_year_ma=df_year[df_year['type_local'].str.contains('Appartement') == False]
