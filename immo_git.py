@@ -153,6 +153,7 @@ df_pie=median.groupby(['type_local'])['obs'].sum()
 df_year = median[['type_local','year', 'obs']]
 #df_year=df_year.pivot(index='year', columns='type_local', values='obs')
 df_year=df_year.replace(np.nan, 0)
+df_year = df_year.groupby(['year','type_local'])['obs']
 #df_year = df_year.astype(int)
 
 df_pie=df_pie.reset_index('type_local', inplace=False)
@@ -160,7 +161,7 @@ df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
 figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
 
 st.plotly_chart(figpie)
-st.dataframe(df_year)
+
 #if not df_year.empty:
 st.subheader('Evolution des ventes par années :')
 st.dataframe(df_year)
