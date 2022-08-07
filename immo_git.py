@@ -107,6 +107,7 @@ df['z_score'] = (df['price_m2'] - df['price_m2'].mean()) / df['price_m2'].std()
 
 df_w_o = df[(df['z_score'] < 3) & (df['z_score'] > -3)]
 
+
 df_w_o = df_w_o[df_w_o['nature_mutation'].str.contains('Adjudication') == False]
 df_w_o = df_w_o[df_w_o['nature_mutation'].str.contains('Echange') == False]
 df_w_o = df_w_o[df_w_o['nature_mutation'].str.contains('Vente en létat futur dachèvement') == False]
