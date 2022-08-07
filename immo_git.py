@@ -151,6 +151,8 @@ df_pie=median.groupby(['type_local'])['obs'].sum()
 
 # Mutations per type per year.
 df_year = median[['type_local','year', 'obs']]
+df_year_ap=df_year[df_year['type_local'].str.contains('Maison') == False]
+df_year_ma=df_year[df_year['type_local'].str.contains('Appartement') == False]
 #df_year=df_year.replace(np.nan, 0)
 #df_year=df_year.pivot(index='year', columns='type_local', values='obs')
 #df_year=df_year.replace(np.nan, 0)
@@ -163,7 +165,7 @@ figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
 
 st.plotly_chart(figpie)
 
-st.dataframe(df_year)
+st.dataframe(df_year_ap)
 #if not df_year.empty:
   #st.subheader('Evolution des ventes par années :')
   #st.dataframe(df_year)
