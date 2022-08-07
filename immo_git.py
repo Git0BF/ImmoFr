@@ -168,13 +168,13 @@ st.plotly_chart(figpie)
 #st.dataframe(df_year_ap)
 with col1b:
   if not df_year_ap.empty:
-    st.title('Evolution des ventes d`appartement par années :')
+    st.text("Evolution des ventes d'appartement :")
     figdist = px.bar(df_year_ap, x=df_year_ap.year, y=df_year_ap.obs, width=400, height=400)
     st.plotly_chart(figdist)
 
 with col2b:
   if not df_year_ma.empty:
-    st.title('Evolution des ventes de maison par années :')
+    st.text('Evolution des ventes de maison :')
     figdist = px.bar(df_year_ma, x=df_year_ma.year, y=df_year_ma.obs, width=400, height=400)
     st.plotly_chart(figdist)
  
