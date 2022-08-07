@@ -165,9 +165,9 @@ st.subheader('Evolution des ventes par années :')
   
 #figdist = px.histogram(df_year, x=df_year.index, color=df_year.columns)
 #figdist = px.histogram(df_year, x=df_year.index)
-figdist=px.bar(df_year, x=df_year.index, y=df.columns, barmode='group')
-
-st.plotly_chart(figdist)
+#figdist=px.bar(df_year, x=df_year.index, y=["Appartement", "Maison"], barmode='group')
+st.dataframe(df_year)
+#st.plotly_chart(figdist)
  
 # Separate local types and graph the mean and median price evolution over time.  
 median_ap=median[median['type_local'].str.contains('Maison') == False]
