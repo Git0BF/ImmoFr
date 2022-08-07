@@ -163,6 +163,7 @@ df_pie=df_pie.reset_index('type_local', inplace=False)
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
 figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
 
+st.text('Overall recap')
 st.plotly_chart(figpie)
 
 #st.dataframe(df_year_ap)
