@@ -151,7 +151,7 @@ df_pie=median.groupby(['type_local'])['obs'].sum()
 
 # Mutations per type per year.
 df_year = median[['type_local','year', 'obs']]
-df_year =df_year.groupby(['type local'])
+df_year =df_year.groupby(['type_local'])
 #df_year=df_year.replace(np.nan, 0)
 #df_year=df_year.pivot(index='year', columns='type_local', values='obs')
 #df_year=df_year.replace(np.nan, 0)
