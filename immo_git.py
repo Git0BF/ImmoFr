@@ -154,22 +154,19 @@ df_year = median[['type_local','year', 'obs']]
 df_year=df_year.pivot(index='year', columns='type_local', values='obs')
 df_year=df_year.replace(np.nan, 0)
 df_year = df_year.astype(int)
-#df_pivoted = df_year.pivot_table(index=['2014', 'day'], columns='time',values='value', aggfunc='first').reset_index()
 
 df_pie=df_pie.reset_index('type_local', inplace=False)
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
 figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
-
-#chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes", type="quantitative"), color=alt.Color(field="type_local", type="nominal"),)
 
 st.plotly_chart(figpie)
 
 st.subheader('Evolution des ventes par années :')
 #figdist = px.histogram(df_year, x=df_year.index, color=df_year.columns)
 #figdist = px.histogram(df_year, x=df_year.index)
-figdist=px.line(df_year, x=df_year.index, y=['Appartement','Maison'], barmode='group')
+#figdist=px.line(df_year, x=df_year.index, y=['Appartement','Maison'], barmode='group')
 
-st.plotly_chart(figdist)
+st.dataframe(df_year)
  
 # Separate local types and graph the mean and median price evolution over time.  
 median_ap=median[median['type_local'].str.contains('Maison') == False]
