@@ -145,11 +145,11 @@ median['price_m2_mean']= mean['price_m2']
 # Plot all the sales per type of local.
 st.subheader('Type de biens vendus entre 2014 et 2019 :')
 
-col1b, col2b = st.columns([5, 6])
 
 df_pie=median.groupby(['type_local'])['obs'].sum()
 
 # Mutations per type per year.
+col1b, col2b = st.columns([5, 6])
 df_year = median[['type_local','year', 'obs']]
 df_year_ap=df_year[df_year['type_local'].str.contains('Maison') == False]
 df_year_ma=df_year[df_year['type_local'].str.contains('Appartement') == False]
@@ -165,12 +165,20 @@ figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
 
 st.plotly_chart(figpie)
 
-st.dataframe(df_year_ap)
-#if not df_year.empty:
-  #st.subheader('Evolution des ventes par années :')
+#st.dataframe(df_year_ap)
+with col1b:
+  if not df_year_ap.empty:
+  st.subheader('Evolution des ventes d`appartement par années :')
   #st.dataframe(df_year)
-  #figdist = px.bar(df_year, x=df_year.index, y=df_year.columns)
-  #st.plotly_chart(figdist)
+  figdist = px.bar(df_year_ap, x=df_year_ap.year, y=df_year_ap.obs)
+  st.plotly_chart(figdist)
+
+with col2b:
+  if not df_year_ma.empty:
+  st.subheader('Evolution des ventes de maison par années :')
+  #st.dataframe(df_year)
+  figdist = px.bar(df_year_ma, x=df_year_ma.year, y=df_year_ma.obs)
+  st.plotly_chart(figdist)
  
 # Separate local types and graph the mean and median price evolution over time.  
 median_ap=median[median['type_local'].str.contains('Maison') == False]
