@@ -4,7 +4,8 @@ import pandas as pd
 import requests
 import numpy as np
 import statistics
-import random, string
+import random, string, sys
+import altair as alt
 import plotly.express as px
 
 # Title.
@@ -23,13 +24,13 @@ div[data-baseweb="tooltip"] {
 """
 st.markdown(tooltip_style,unsafe_allow_html=True)
 
-#Enter the city.
+# Enter the city.
 codePostal = st.sidebar.text_input('Ville :', help='France entière, Alsace et Moselle exclus')
 
 if codePostal != None:
     codePostalS= str(codePostal)
 
-# Enter the address. 
+# Enter the address.
 adresse = st.sidebar.text_input('Adresse :', help='Ex: 16 rue de la Source')
 if adresse != None:
     adresseS= str(adresse)
@@ -42,7 +43,7 @@ dist= str(dist)
 if not codePostal:
     st.write('Commencez votre recherche dans la barre de recherche à gauche')
     st.stop()
-
+    
 # Search recap.
 st.write('Votre recherche : '+adresseS+' à '+codePostal+' dans un rayon de '+dist+'m pour la periode 2014-2019')
 
@@ -69,14 +70,13 @@ if (my_str.__contains__(target)):
 if (my_str.__contains__(target1)):
     st.write('Cette zone geographique est indisponible')
     st.stop()
+
 if location == None:
     st.write('Essayez une adresse à proximité')
     st.stop()
 
 lat1=str(location.latitude)
- 
-lon1=str(location.longitude)
- 
+lon1=str(location.longitude) 
 loc=str(location)
 
 # Request the API.
@@ -88,7 +88,7 @@ dataR = request.json()
 datacomr1=list(dict.values(dataR))
 area=datacomr1[4]
 
-# Make a dataframe from JSON
+# Make a dataframe from JSON.
 df = pd.DataFrame.from_dict(pd.json_normalize(area), orient='columns')
 
 # Data cleaning :
@@ -116,6 +116,7 @@ df['year'] = df['date_mutation'].dt.year
 df=df[df.price_m2 < df.price_m2.quantile(.95)]
 
 df['z_score'] = (df['price_m2'] - df['price_m2'].mean()) / df['price_m2'].std()
+
 df_w_o = df[(df['z_score'] < 3) & (df['z_score'] > -3)]
 
 # Focus on relevant mutations.
@@ -141,11 +142,11 @@ medianl= medianl.reset_index(name='obs')
 median['obs']= medianl['obs']
 median['price_m2_mean']= mean['price_m2']
 
+# Plot all the sales per type of local.
 st.subheader('Type de biens vendus entre 2014 et 2019 :')
 
 col1b, col2b = st.columns([5, 6])
 
-# Plot all the sales per type of local.
 df_pie=median.groupby(['type_local'])['obs'].sum()
 
 # Mutations per type per year.
@@ -153,10 +154,13 @@ df_year = median[['type_local','year', 'obs']]
 df_year=df_year.pivot(index='year', columns='type_local', values='obs')
 df_year=df_year.replace(np.nan, 0)
 df_year = df_year.astype(int)
+#df_pivoted = df_year.pivot_table(index=['2014', 'day'], columns='time',values='value', aggfunc='first').reset_index()
 
 df_pie=df_pie.reset_index('type_local', inplace=False)
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
 figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
+
+chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes", type="quantitative"), color=alt.Color(field="type_local", type="nominal"),)
 
 st.plotly_chart(figpie)
 
@@ -165,7 +169,7 @@ st.subheader('Evolution des ventes par années :')
 chartdist=px.bar(df_year, x=df_year.index, y=['Appartement','Maison'], barmode='group')
 
 st.plotly_chart(chartdist)
-
+ 
 # Separate local types and graph the mean and median price evolution over time.  
 median_ap=median[median['type_local'].str.contains('Maison') == False]
 median_ap.drop(columns=['nature_mutation','type_local', 'obs'], inplace=True)
@@ -187,7 +191,7 @@ if maison:
   fig2 = px.bar(median_ma, x="year", y=["price_m2_median", "price_m2_mean"],  barmode='group', title="Prix moyen (rouge) et median (bleu) d'une maison(€/m2)")
   st.plotly_chart(fig2)
     
-# The distribution of mutations per surface.      
+ # The distribution of mutations per surface.             
 df_surf_dist=df_w_o['surface_relle_bati'].value_counts(bins=20, sort=False)
 df_surf_dist = df_surf_dist.reset_index(name='surface_relle_bati')
 df_surf_dist.rename(columns = {'index':'range'}, inplace = True)
@@ -243,7 +247,7 @@ df_price_dist1.rename(columns = {'valeur_fonciere':'Mutations/surface'}, inplace
 col2a.subheader('Distribution Qte/Px')
 col2a.bar_chart(df_price_dist1)
 
-# Generate a heat map of the transactions.
+# Generate a heatmap of the transactions.
 st.subheader('Carte des ventes :')
 lat1=float(lat1)
 lon1=float(lon1)
