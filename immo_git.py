@@ -160,15 +160,15 @@ df_pie=df_pie.reset_index('type_local', inplace=False)
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
 figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
 
-chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes", type="quantitative"), color=alt.Color(field="type_local", type="nominal"),)
+#chartp=alt.Chart(df_pie).mark_arc().encode(theta=alt.Theta(field="Nbr_de_ventes", type="quantitative"), color=alt.Color(field="type_local", type="nominal"),)
 
 st.plotly_chart(figpie)
 
 st.subheader('Evolution des ventes par années :')
+figdist = px.histogram(df_year, x=df_year.index)
+#chartdist=px.line(df_year, x=df_year.index, y=['Appartement','Maison'], barmode='group')
 
-chartdist=px.bar(df_year, x=df_year.index, y=['Appartement','Maison'], barmode='group')
-
-st.plotly_chart(chartdist)
+st.plotly_chart(figdist)
  
 # Separate local types and graph the mean and median price evolution over time.  
 median_ap=median[median['type_local'].str.contains('Maison') == False]
