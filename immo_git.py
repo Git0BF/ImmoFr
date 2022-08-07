@@ -165,9 +165,9 @@ figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
 st.plotly_chart(figpie)
 
 st.subheader('Evolution des ventes par années :')
-figdist = px.histogram(df_year, x=df_year.index, color=df_year.columns)
+#figdist = px.histogram(df_year, x=df_year.index, color=df_year.columns)
 #figdist = px.histogram(df_year, x=df_year.index)
-#chartdist=px.line(df_year, x=df_year.index, y=['Appartement','Maison'], barmode='group')
+figdist=px.line(df_year, x=df_year.index, y=['Appartement','Maison'], barmode='group')
 
 st.plotly_chart(figdist)
  
