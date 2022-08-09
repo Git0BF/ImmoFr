@@ -259,7 +259,7 @@ df_hmap=df_map.value_counts(['lat', 'lon']).reset_index(name='Transactions')
 
 figmap = px.density_mapbox(df_hmap, lat='lat', lon='lon', z='Transactions', radius=10,
                         center=dict(lat=lat1, lon=lon1), zoom=13,
-                        mapbox_style="carto-positron")
+                        mapbox_style="stamen- terrain")
 st.plotly_chart(figmap)
 
 st.stop()
