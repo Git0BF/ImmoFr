@@ -153,11 +153,6 @@ col1b, col2b = st.columns([5, 5])
 df_year = median[['type_local','year', 'obs']]
 df_year_ap=df_year[df_year['type_local'].str.contains('Maison') == False]
 df_year_ma=df_year[df_year['type_local'].str.contains('Appartement') == False]
-#df_year=df_year.replace(np.nan, 0)
-#df_year=df_year.pivot(index='year', columns='type_local', values='obs')
-#df_year=df_year.replace(np.nan, 0)
-#df_year = df_year.groupby(['year','type_local'])['obs'].sum()
-#df_year = df_year.astype(int)
 
 df_pie=df_pie.reset_index('type_local', inplace=False)
 df_pie.rename(columns = {'obs':'Nbr_de_ventes'}, inplace = True)
@@ -166,7 +161,6 @@ figpie = px.pie(df_pie, values='Nbr_de_ventes', names='type_local', title=None)
 st.text('Overall recap :')
 st.plotly_chart(figpie)
 
-#st.dataframe(df_year_ap)
 with col1b:
   if not df_year_ap.empty:
     st.text("Evolution des ventes d'appartement :")
