@@ -189,7 +189,7 @@ if appartement:
   fig1 = px.bar(median_ap, x="year", y=["price_m2_median", "price_m2_mean"],  barmode='group', title="Prix moyen (rouge) et median (bleu) d'un appartement(€/m2)")
  
   st.plotly_chart(fig1)
-  st.dataframe(medin_ap)
+  st.dataframe(median_ap)
     
 if maison:
   fig2 = px.bar(median_ma, x="year", y=["price_m2_median", "price_m2_mean"],  barmode='group', title="Prix moyen (rouge) et median (bleu) d'une maison(€/m2)")
