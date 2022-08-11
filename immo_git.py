@@ -175,7 +175,7 @@ with col2b:
  
 # Separate local types and graph the mean and median price evolution over time.  
 median_ap=median[median['type_local'].str.contains('Maison') == False]
-median_ap.drop(columns=['nature_mutation','type_local', 'obs'], inplace=True)
+#median_ap.drop(columns=['nature_mutation','type_local', 'obs'], inplace=True)
 
 median_ma=median[median['type_local'].str.contains('Appartement') == False]
 median_ma.drop(columns=['nature_mutation','type_local', 'obs'], inplace=True)
@@ -186,9 +186,9 @@ appartement = st.checkbox('Appartement')
 maison=st.checkbox('Maison')
 
 if appartement:
-  fig1 = px.bar(median_ap, x="year", y=["price_m2_median", "price_m2_mean"],  barmode='group', title="Prix moyen (rouge) et median (bleu) d'un appartement(€/m2)")
+  #fig1 = px.bar(median_ap, x="year", y=["price_m2_median", "price_m2_mean"],  barmode='group', title="Prix moyen (rouge) et median (bleu) d'un appartement(€/m2)")
  
-  st.plotly_chart(fig1)
+  #st.plotly_chart(fig1)
   st.dataframe(median_ap)
     
 if maison:
