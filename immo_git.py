@@ -240,7 +240,9 @@ df_surf_dist1.drop ('range', axis=1, inplace=True)
 df_surf_dist1 = df_surf_dist1.rename(columns={'left':'index'}).set_index('index')
 df_surf_dist1.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
 col2.subheader('Distribution Qte/Surf')
-col2.bar_chart(df_surf_dist1)
+#col2.bar_chart(df_surf_dist1)
+fig = px.bar(df_surf_dist1,x = 'index',y = 'ventes')
+col2.plotly_chart(fig)
 
 df_price_dist1=df_price_dist
 df_price_dist1['left'] = df_price_dist['range'].array.left
