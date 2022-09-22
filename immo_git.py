@@ -234,16 +234,19 @@ col1a.write(df_price_dist.head(8))
 
 df_surf_dist1= df_surf_dist
 
-df_surf_dist1['left'] = df_surf_dist['range'].array.left
+#df_surf_dist1['left'] = df_surf_dist['range'].array.left
 
-df_surf_dist1.drop ('range', axis=1, inplace=True)
-df_surf_dist1 = df_surf_dist1.rename(columns={'left':'index'}).set_index('index')
+#df_surf_dist1.drop ('range', axis=1, inplace=True)
+#df_surf_dist1 = df_surf_dist1.rename(columns={'left':'index'}).set_index('index')
 df_surf_dist1.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
 col2.subheader('Distribution Qte/Surf')
+fig = px.histogram(df_surf_dist1, x="range")
+
 #col2.bar_chart(df_surf_dist1)
-with col2:
-  fig = px.bar(df_surf_dist1, x = df_surf_dist1.index, y = 'Ventes')
-  st.plotly_chart(fig)
+
+#with col2:
+  #fig = px.bar(df_surf_dist1, x = df_surf_dist1.index, y = 'Ventes')
+  #st.plotly_chart(fig)
 
 df_price_dist1=df_price_dist
 df_price_dist1['left'] = df_price_dist['range'].array.left
