@@ -24,24 +24,24 @@ div[data-baseweb="tooltip"] {
 """
 st.markdown(tooltip_style,unsafe_allow_html=True)
 
-# Enter the city.
+# Input the city.
 codePostal = st.sidebar.text_input('Ville :', help='France entière, Alsace et Moselle exclus')
 
 if codePostal != None:
     codePostalS= str(codePostal)
 
-# Enter the address.
+# Input the address.
 adresse = st.sidebar.text_input('Adresse :', help='Ex: 16 rue de la Source')
 if adresse != None:
     adresseS= str(adresse)
 
-# Enter the size of the area.
+# Input the size of the area.
 dist = st.sidebar.slider('Choisissez un rayon (m) :', 100, 500, 1000) 
 dist= str(dist)
 
 # Help before the first search.
 if not codePostal:
-    st.write('Commencez votre recherche dans la barre de recherche à gauche')
+    st.write('Commencez votre recherche dans la barre de gauche')
     st.stop()
     
 # Search recap.
