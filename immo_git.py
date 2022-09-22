@@ -241,7 +241,7 @@ df_surf_dist1= df_surf_dist
 df_surf_dist1.rename(columns = {'surface_relle_bati':'Ventes'}, inplace = True)
 col2.subheader('Distribution Qte/Surf')
 fig = px.histogram(df_surf_dist1, x="range")
-
+st.plotly_chart(fig)
 #col2.bar_chart(df_surf_dist1)
 
 #with col2:
