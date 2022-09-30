@@ -117,7 +117,7 @@ df=df[df.price_m2 < df.price_m2.quantile(.95)]
 
 df['z_score'] = (df['price_m2'] - df['price_m2'].mean()) / df['price_m2'].std()
 
-df_w_o = df[(df['z_score'] < 3) & (df['z_score'] > -3)]
+df_w_o = df[(df['z_score'] < 2) & (df['z_score'] > -2)]
 
 # Focus on relevant mutations.
 df_w_o = df_w_o[df_w_o['nature_mutation'].str.contains('Adjudication') == False]
