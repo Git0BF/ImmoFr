@@ -84,7 +84,10 @@ url= 'http://api.cquest.org/dvf?lat='+lat1+'&lon='+lon1+'&dist='+dist
 
 # Target the relevant data.
 request= requests.get(url)
-dataR = request.json() 
+print(request)
+dataR = request.json()
+print('-------------------------------') 
+print(dataR)
 datacomr1=list(dict.values(dataR))
 area=datacomr1[4]
 
