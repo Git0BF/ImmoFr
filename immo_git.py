@@ -82,6 +82,8 @@ loc=str(location)
 # Request the API.
 url= 'http://api.cquest.org/dvf?lat='+lat1+'&lon='+lon1+'&dist='+dist
 
+print(url)
+
 # Target the relevant data.
 request= requests.get(url)
 print(request)
