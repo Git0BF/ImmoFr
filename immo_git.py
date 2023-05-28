@@ -85,7 +85,19 @@ url= 'http://api.cquest.org/dvf?lat='+lat1+'&lon='+lon1+'&dist='+dist
 print(url)
 
 # Target the relevant data.
-request= requests.get(url)
+
+try:
+    request = requests.get(url)
+    request.raise_for_status()  # This will raise an HTTPError if the response was unsuccessful
+    dataR = request.json()
+except requests.exceptions.HTTPError as http_err:
+    st.write(f'HTTP error occurred: {http_err}')  
+except requests.exceptions.RequestException as err:
+    st.write(f'Error Occurred: {err}')  
+except requests.exceptions.JSONDecodeError:
+    st.write('Could not decode the response into JSON')
+
+#request= requests.get(url)
 print(request)
 dataR = request.json()
 print('-------------------------------') 
